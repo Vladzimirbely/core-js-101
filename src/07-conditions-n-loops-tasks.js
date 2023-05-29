@@ -187,22 +187,21 @@ function isInsideCircle(circle, point) {
 function findFirstSingleChar(str) {
   const hash = {};
 
-    for (let i of str) {
-
-        if (hash[i]) {
-            hash[i] += 1;
-        } else {
-            hash[i] = 1;
-        }
+  for (let i of str) {
+    if (hash[i]) {
+      hash[i] += 1;
+    } else {
+      hash[i] = 1;
     }
+  }
 
-    for (let i = 0; i < str.length; i++) {
-        if(hash[str[i]] === 1) {
-            return str[i];
-        }
+  for (let i = 0; i < str.length; i++) {
+    if(hash[str[i]] === 1) {
+        return str[i];
     }
+  }
 
-    return null;
+  return null;
 }
 
 
@@ -307,8 +306,25 @@ function reverseInteger(num) {
  *   5436468789016589 => false
  *   4916123456789012 => false
  */
-function isCreditCardNumber(/* ccn */) {
-  throw new Error('Not implemented');
+function isCreditCardNumber(ccn) {
+  let fall = false;
+  let res = 0;
+  let i = String(ccn).length - 1;
+
+  while (i >= 0) {
+    const num = parseInt(String(ccn)[i], 10);
+
+    if (fall && num * 2 > 9) {
+      res += num * 2 - 9;
+    } else {
+      res += !fall ? num : num * 2;
+    }
+
+    fall = !fall;
+    i--;
+  }
+
+  return res % 10 === 0;
 }
 
 /**
@@ -459,8 +475,46 @@ function getMatrixProduct(/* m1, m2 */) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
+function evaluateTicTacToePosition(position) {
+  if (position[0][0]) {
+    if (position[0][0] === position[0][1] && position[0][1] === position[0][2]) {
+      return position[0][0];
+    }
+
+    if (position[0][0] === position[1][0] && position[1][0] === position[2][0]) {
+      return position[0][0];
+    }
+
+    if (position[0][0] === position[1][1] && position[1][1] === position[2][2]) {
+      return position[0][0];
+    }
+  }
+
+  if (position[1][1]) {
+    if (position[1][1] === position[1][0] && position[1][1] === position[1][2]) {
+      return position[1][1];
+    }
+
+    if (position[1][1] === position[0][1] && position[1][1] === position[2][1]) {
+      return position[1][1];
+    }
+
+    if (position[1][1] === position[2][0] && position[1][1] === position[0][2]) {
+      return position[1][1];
+    }
+  }
+
+  if (position[2][2]) {
+    if (position[2][2] === position[2][0] && position[2][2] === position[2][1]) {
+      return position[2][2];
+    }
+
+    if (position[2][2] === position[1][2] && position[2][2] === position[0][2]) {
+      return position[2][2];
+    }
+  }
+
+  return undefined;
 }
 
 
