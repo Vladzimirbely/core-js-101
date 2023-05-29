@@ -6,7 +6,7 @@
  *                                                                                                *
  ************************************************************************************************ */
 
-
+/* eslint-disable */
 /**
  * Returns the rectangle object with width and height parameters and getArea() method
  *

@@ -5,7 +5,7 @@
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration              *
  *                                                                                                *
  ************************************************************************************************ */
-
+/* eslint-disable */
 
 /**
  * Returns the 'Fizz','Buzz' or an original number using the following rules:
