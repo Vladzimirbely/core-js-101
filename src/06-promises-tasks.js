@@ -1,10 +1,12 @@
+/* eslint-disable */
+
 /* ************************************************************************************************
  *                                                                                                *
  * Please read the following tutorial before implementing tasks:                                   *
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise       *
  *                                                                                                *
  ************************************************************************************************ */
-/* eslint-disable */
+
 
 /**
  * Return Promise object that is resolved with string value === 'Hooray!!! She said "Yes"!',

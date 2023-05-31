@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 /* *************************************************************************************************
  *                                                                                                *
  * Please read the following tutorial before implementing tasks:                                   *
@@ -5,7 +7,6 @@
  * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Loops_and_iteration              *
  *                                                                                                *
  ************************************************************************************************ */
-/* eslint-disable */
 
 /**
  * Returns the 'Fizz','Buzz' or an original number using the following rules:
@@ -440,8 +441,20 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/verbalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  let res = '';
+  let arr = pathes.shift().split('/');
+  const spl = pathes.map((el) => el.split('/'));
+  let i = 0;
+
+  arr.forEach(elem => {
+    if (spl.every((el) => el[i] === elem)) {
+      res += elem + '/';
+      i++;
+    }
+  })
+
+  return res.length <= 0 ? '' : res;
 }
 
 
@@ -463,8 +476,24 @@ function getCommonDirectoryPath(/* pathes */) {
  *                         [ 6 ]]
  *
  */
-function getMatrixProduct(/* m1, m2 */) {
-  throw new Error('Not implemented');
+function getMatrixProduct(m1, m2) {
+  const res = [];
+
+  m1.forEach(elem => {
+    const arr = [];
+
+    for (let i = 0; i < elem.length; i++) {
+      const count = elem.reduce((acc, val, idx) => acc + elem[idx] * m2[idx][i], 0);
+
+      if (Math.abs(count) > 0) {
+        arr.push(elem.reduce((acc, val, idx) => acc + elem[idx] * m2[idx][i], 0));
+      }
+    }
+
+    res.push(arr);
+  })
+
+  return res;
 }
 
 
