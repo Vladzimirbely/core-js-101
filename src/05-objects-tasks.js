@@ -113,33 +113,57 @@ function fromJSON(proto, json) {
  */
 
 const cssSelectorBuilder = {
-  element(/* value */) {
-    throw new Error('Not implemented');
+  curr: 0,
+  res: String(),
+  double: [1, 2, 6],
+
+  add(classes, idx) {
+    const next = Object.create(cssSelectorBuilder);
+    const err1 = 'Selector parts should be arranged in the following order: element, id, class, attribute, pseudo-class, pseudo-element';
+    const err2 = 'Element, id and pseudo-element should not occur more then one time inside the selector';
+    next.res = this.res + classes;
+    next.curr = idx;
+
+    if (this.curr > idx) {
+      throw new Error(err1);
+    } else if (this.double.includes(idx) && this.curr === idx) {
+      throw new Error(err2);
+    } else {
+      return next;
+    }
   },
 
-  id(/* value */) {
-    throw new Error('Not implemented');
+  stringify() {
+    return this.res;
   },
 
-  class(/* value */) {
-    throw new Error('Not implemented');
+  element(value) {
+    return this.add(value, 1);
   },
 
-  attr(/* value */) {
-    throw new Error('Not implemented');
+  id(value) {
+    return this.add(`#${value}`, 2);
   },
 
-  pseudoClass(/* value */) {
-    throw new Error('Not implemented');
+  class(value) {
+    return this.add(`.${value}`, 3);
   },
 
-  pseudoElement(/* value */) {
-    throw new Error('Not implemented');
+  attr(value) {
+    return this.add(`[${value}]`, 4);
   },
 
-  combine(/* selector1, combinator, selector2 */) {
-    throw new Error('Not implemented');
+  pseudoClass(value) {
+    return this.add(`:${value}`, 5);
   },
+
+  pseudoElement(value) {
+    return this.add(`::${value}`, 6);
+  },
+
+  combine(selector1, combinator, selector2) {
+    return this.add(`${selector1.res} ${combinator} ${selector2.res}`);
+  }
 };
 
 
